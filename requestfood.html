@@ -1,0 +1,17 @@
+@app.route('/request_food', methods=['GET', 'POST'])
+def request_food():
+    if request.method == 'POST':
+        food_item = request.form['food_item']
+        quantity = request.form['quantity']
+        location = request.form['location']
+        contact = request.form['contact']
+
+        file_exists = os.path.isfile('requested_food.csv')
+        with open('requested_food.csv', 'a', newline='') as file:
+            writer = csv.writer(file)
+            if not file_exists:
+                writer.writerow(['Food Item', 'Quantity', 'Location', 'Contact'])
+            writer.writerow([food_item, quantity, location, contact])
+
+        return render_template('THANKYOU.html')  # exact case
+    return render_template('requestfood.html')  # exact file name

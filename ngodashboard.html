@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NGO Dashboard</title>
+    <style>
+        table { border-collapse: collapse; width: 80%; margin: auto; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        h1 { text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>Food Available for Pickup</h1>
+    {% if submissions %}
+        <table>
+    <tr>
+        <th>Food ID</th>
+        <th>Restaurant</th>
+        <th>Food Item</th>
+        <th>Quantity</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    {% for index, row in food.iterrows() %}
+    <tr>
+        <td>{{ row['Food ID'] }}</td>
+        <td>{{ row['Restaurant Name'] }}</td>
+        <td>{{ row['Food Item'] }}</td>
+        <td>{{ row['Quantity'] }}</td>
+        <td>{{ row['Status'] }}</td>
+        <td>
+            {% if row['Status'] != 'Picked Up' %}
+                <a href="{{ url_for('pickup_food', food_id=row['Food ID']) }}">Mark as Picked Up</a>
+            {% else %}
+                ✅ Picked Up
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>

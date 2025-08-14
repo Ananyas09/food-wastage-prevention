@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NGO-Restaurant Connect</title>
+</head>
+<body>
+    <h1>🍽 Restaurant & NGO Food Wastage Matching</h1>
+    {% for item in matched_data %}
+        <h2>Restaurant: {{ item.restaurant.Name }} ({{ item.restaurant.Area }})</h2>
+        <p>City: {{ item.restaurant.City }}</p>
+        <p>Contact: {{ item.restaurant['Contact Person'] }} - {{ item.restaurant['Phone Number'] }}</p>
+
+        {% if item.ngos %}
+            <h3>Matching NGOs:</h3>
+            <ul>
+                {% for ngo in item.ngos %}
+                    <li><strong>{{ ngo['NGO Name'] }}</strong> - {{ ngo.Area }}, Contact: {{ ngo['Contact Person'] }} ({{ ngo['Phone Number'] }})</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p style="color:red;">No NGO found in this area.</p>
+        {% endif %}
+        <hr>
+    {% endfor %}
+</body>
+</html>

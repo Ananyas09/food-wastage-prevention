@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h2>Welcome, {{ user['user_type'] }} ({{ user['email'] }})</h2>
+{% if user['user_type'] == 'Restaurant' %}
+    <a href="{{ url_for('submitfood') }}">Submit Food</a>
+{% elif user['user_type'] == 'NGO' %}
+    <a href="{{ url_for('requestfood') }}">Request Food</a>
+{% endif %}
+
+
+       <br><br>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
